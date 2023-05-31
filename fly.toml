@@ -1,0 +1,29 @@
+# fly.toml app configuration file generated for mongo2 on 2023-05-31T10:09:31-03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+primary_region = "gru"
+
+[[mounts]]
+  source = "mongo_data"
+  destination = "/data"
+
+[checks]
+  [checks.vm]
+    grace_period = "1s"
+    interval = "1m"
+    method = "get"
+    path = "/flycheck/vm"
+    port = 5500
+    timeout = "10s"
+    type = "http"
+
+  [checks.role]
+    grace_period = "30s"
+    interval = "15s"
+    method = "get"
+    path = "/flycheck/role"
+    port = 5500
+    timeout = "10s"
+    type = "http"
