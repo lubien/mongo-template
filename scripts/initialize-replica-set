@@ -1,0 +1,13 @@
+#!/bin/sh
+
+command=$(cat << EOF
+rs.initiate( {
+   _id : "rs0",
+   members: [
+      { _id: 0, host: "$FLY_MACHINE_ID.vm.$FLY_APP_NAME.internal:27017" },
+   ]
+})
+EOF
+)
+
+mongosh --eval "$command"

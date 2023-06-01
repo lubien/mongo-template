@@ -1,0 +1,8 @@
+#!/bin/sh
+
+command=$(cat << EOF
+rs.add( { host: "$1.vm.$FLY_APP_NAME.internal:27017" })
+EOF
+)
+
+mongosh -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --eval "$command"

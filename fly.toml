@@ -10,20 +10,19 @@ primary_region = "gru"
   destination = "/data"
 
 [checks]
-  [checks.vm]
-    grace_period = "1s"
-    interval = "1m"
-    method = "get"
-    path = "/flycheck/vm"
-    port = 5500
-    timeout = "10s"
-    type = "http"
-
   [checks.role]
+    port = 5500
+    type = "http"
+    interval = "5s"
+    timeout = "10s"
     grace_period = "30s"
-    interval = "15s"
     method = "get"
     path = "/flycheck/role"
+  [checks.vm]
     port = 5500
-    timeout = "10s"
     type = "http"
+    interval = "15s"
+    timeout = "10s"
+    grace_period = "1s"
+    method = "get"
+    path = "/flycheck/vm"
