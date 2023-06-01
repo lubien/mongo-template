@@ -9,7 +9,9 @@ import (
 )
 
 type IsPrimaryCommandResult struct {
-	IsPrimary *bool `json:"ismaster"`
+	IsPrimary   *bool  `json:"ismaster"`
+	IsSecondary *bool  `json:"secondary"`
+	Info        string `json:"info"`
 }
 
 // MachineRole outputs current role
@@ -28,14 +30,21 @@ func MachineRole(ctx context.Context, checks *check.CheckSuite) (*check.CheckSui
 			return "", err
 		}
 
-		if data.IsPrimary == nil {
-			return "error", nil
-		}
-		if *data.IsPrimary {
+		if *data.IsPrimary == true {
 			return "primary", nil
-		} else {
+		} else if *data.IsSecondary == true {
 			return "replica", nil
 		}
+
+		if data.Info == "Does not have a valid replica set config" {
+			return "non-initialized", nil
+		}
+
+		if data.Info != "" {
+			return data.Info, nil
+		}
+
+		return "error", nil
 	})
 
 	return checks, nil
