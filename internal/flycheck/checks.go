@@ -11,8 +11,6 @@ import (
 	"github.com/superfly/fly-checks/check"
 )
 
-const Port = 5500
-
 func Handler() http.Handler {
 	r := http.NewServeMux()
 
