@@ -2,7 +2,7 @@
 
 This is an example on how to run a MongoDB Replica Set Cluster. Use this for educational or curiosity purposes, it's not meant to be ran in production.
 
-The first step is to deploy the first machine.
+The first step is to deploy the first machine. Clone this repo and inside it run these commands.
 
 ```sh
 fly launch --copy-config --no-public-ips --no-deploy
